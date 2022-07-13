@@ -1,0 +1,16 @@
+List Number of Instances Under GCP AutoScaling Group/MIG 
+
+ gcloud compute instance-groups managed list-instances MIGNAME --region ZONENAME '--format=value(instance)'
+
+List Number of Instances Under AWS Autoscaling Group
+
+aws autoscaling describe-auto-scaling-groups --auto-scaling-group-names "${BACKEND_LAYER}" | jq -r ".AutoScalingGroups[].Instances[].InstanceId"
+
+
+Get IP address of Instance in GCP
+
+gcloud compute instances list --filter="name=INSTANCENAME" --format "value(networkInterfaces[].networkIP.notnull().list():label=INTERNAL_IP)"
+
+
+GET IP address of Instance in AWS
+aws ec2 describe-instances --instance-ids INSTANCENAME --query Reservations[].Instances[].PrivateIpAddress --output text )
